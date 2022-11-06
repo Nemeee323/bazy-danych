@@ -19,10 +19,13 @@ select ProductName, UnitPrice from Products where UnitPrice >50;
 select CompanyName, Fax from Customers where fax is null or fax like '';
 
 --select OrderID from Orders where OrderDate between '1996-07-01' and '1996-07-31';  - szukanie zamowien w lipcu 1996
+
 --select CompanyName from Customers where Country like 'USA' or country like 'spain'; - szukanie nazw firm z usa i hiszpani
+
 select CompanyName from Customers where Country in('usa', 'spain');
 
 select CompanyName from Customers where (Country like 'USA' or country like 'spain') and city not like'madrid';
+
 select CompanyName from Customers where Country in('usa', 'spain') and city not like'madrid';
 
 select CompanyName, fax, Country from Customers where Country in ('USA') and (Fax is null or fax like ''); 
@@ -31,14 +34,22 @@ select ProductID, UnitPrice, Quantity, Discount, (UnitPrice*Quantity)*(1-Discoun
 
 (UnitPrice*Quantity)*(1-Discount) as wartosc - wyswietla wartosc jako nowa kolumne
 
+
 select ProductName, UnitPrice, UnitsInStock, UnitPrice*UnitsInStock as wartosc
 from Products where UnitPrice*UnitsInStock>1000 and SupplierID not in(5,3);
 
+
 --select OrderID from Orders where OrderDate between '1996-07-01' and '1996-07-31'; 
+
 --select CompanyName from Customers where (Country like 'USA' or country like 'spain') and city not like'madrid';
+
 --select CompanyName from Customers where Country in('usa', 'spain') and city not like'madrid';
+
 --select ProductName from Products where CategoryID in(6,8) and SupplierID !=6;
+
 --select CompanyName, fax, Country from Customers where Country in ('USA') and (Fax is null or fax like ''); 
+
+
 --select ProductID, UnitPrice, Quantity, Discount, (UnitPrice*Quantity)*(1-Discount) as wartosc
 --from[Order Details] 
 --where (UnitPrice*Quantity)*(1-Discount) > 1000
