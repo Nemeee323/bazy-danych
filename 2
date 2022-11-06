@@ -1,0 +1,73 @@
+select left('abcdefg',4);
+
+select left(ProductName,4) as produkty, ProductName from Products;
+
+select right('abcdefg',4);
+
+select CHARINDEX ('$','abcd$efgh'); -- wzraca pozycje na ktorej wystepuje dany char
+
+select left('Jan nowak',CHARINDEX (' ','Jan nowak'));
+
+Select LOWER('abcdDSAF');
+
+Select upper('abcdDSAF');
+
+Select LEN('abcd'); 
+
+select top 1 with ties len(ProductName) as dl, ProductName
+from Products
+order by dl asc
+;
+
+select SUBSTRING('abcdefgh',4,3);- wyciąga od 4 literki, 3 kolejne
+
+select ContactName,
+left(ContactName,CHARINDEX (' ',contactname)) as imie, -- wyswietla nazwe do spacji
+substring(ContactName,CHARINDEX (' ',contactname),len(contactname)) as nazwisko -- wyswietla nazwe od spacji
+from Customers
+
+
+select LTRIM('    abcd	') as a;
+select RTRIM('    abcd    ') as b;
+select TRIM('    abcd   ') as c;
+
+select iif(1=0, 'tak','nie'); -- instrukcja warunkowa
+
+select iif(substring('98231231234',10,1)%2=0, 'kobieta','mężczyzna');
+
+
+select LastName, FirstName,
+case
+when TitleOfCourtesy like 'Mr.' then 'Pan'
+when TitleOfCourtesy like 'Ms.' then 'Pani'
+when TitleOfCourtesy like 'Mrs.' then ' panna'
+else 'inny'
+end as tytuł
+from Employees;
+
+
+
+select ProductName, UnitPrice,
+case
+when unitprice <20 then 'tanio'
+when unitprice between 20 and 39 then 'średnio'
+when unitprice between 40 and 80 then 'drogo'
+when unitprice >80 then 'bardzo drogo'
+else 'erro'
+end as 'czy drogo?'
+from Products
+order by UnitPrice asc;
+
+select concat('abc',' ','efgh');--łaczy wyrazy
+
+select concat(upper(titleofcourtesy),' ',FirstName,' ',LastName) as imienazwiskotytul
+from Employees;
+
+select replace('abdcdsfsdsdc', 'd','$');
+
+select cast(replace('875,98', ',', '.') as float);
+select CONVERT(char,987)+ convert(char, 87);
+
+
+select unitprice, convert(char,UnitPrice) as cena from Products
+
