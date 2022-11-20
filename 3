@@ -1,0 +1,64 @@
+select round(avg(UnitPrice), 2) as srednia
+from Products;                    -srednia cena produktów
+
+
+select round(AVG(unitprice),2), CategoryID
+from Products                               -srednia cena produktów po id
+group by CategoryID
+;
+
+
+select COUNT(productid) as ile, SupplierID
+from Products where SupplierID != 28                ile produktów daje nam dany supplier bez 28. supplier
+group by SupplierID
+
+
+
+
+select COUNT(productid) as ile, SupplierID
+from Products
+where CategoryID <> 4                                  ile produktów daje nam dany supplier bez 28. supplier i category id jest rozne od 4
+group by SupplierID
+having COUNT(productid)>1 and SupplierID != 28
+
+
+select COUNT(customerid) ile, country
+from Customers
+where city not like 'madrid'                          zwraca ile klientów ma dany kraj(hiszpania francja) ale bez miasta madrid
+group by Country
+having country in('spain','france');
+
+
+select count(companyname), left(companyName,1) as literka
+ from Customers                                 ile jest nazw firm na daną literke
+ group by left(companyName,1);
+ 
+ 
+ select count(orderid) as ile, month(OrderDate)
+from Orders
+group by month(OrderDate)         w jakim miesiacu jest najwiecej zamowien
+order by month(OrderDate);
+
+
+
+select avg(DATEDIFF(day,OrderDate,ShippedDate)) as 'sredni czas'  - wyswietla sredni czas zrealizowania dostawy       DATEDIFF-ZWRACA ROZNICA MIEDZY DATAMI
+from Orders
+ 
+ 
+ 
+select avg(DATEDIFF(day,OrderDate,ShippedDate)) as 'sredni czas', EmployeeID
+from Orders
+where RequiredDate > ShippedDate and ShipCountry not like 'venezuela'         wyswietla sredni czas dostawy paczki zaleznych od pracownika dla nie opoznionych paczek  
+group by EmployeeID
+order by [sredni czas]
+ 
+ 
+ 
+ select COUNT(productid) as ile, CategoryID, SupplierID 
+from Products
+group by rollup(CategoryID, SupplierID)      ROLLUP-  KATEGORYZUJE I SUMUJE
+order by CategoryID, SupplierID
+ 
+ 
+ 
+
