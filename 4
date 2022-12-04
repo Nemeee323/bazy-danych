@@ -1,0 +1,63 @@
+--select LastName as nazwisko, FirstName as imię, Title as stanowisko, Country as kraj
+--from Employees
+--where Country in('usa');
+
+
+--select max((unitprice * quantity)-Discount)-min((unitprice * quantity)-Discount) 
+--from [Order Details]
+
+--select * from Customers
+--where CompanyName like 'alfreds futterkiste'
+
+--select DATEDIFF(year,BirthDate,GETDATE()) as lata, *
+--from Employees
+
+--select DATEDIFF(yyyy,HireDate,GETDATE()) as lata, *
+--from Employees
+
+
+--select max(orderdate) as najnowsze
+--from Orders
+--select min(orderdate) as najstarsze
+--from Orders
+
+--select OrderID, ((UnitPrice*Quantity)-Discount) as wartosc 
+--from [Order Details]
+
+
+--select COUNT(contactname) as ile
+--from Customers
+--where Country like 'usa'
+
+--select count(productname) as ile 
+--from Products
+--where QuantityPerUnit not like '%bottl%'
+
+--select CompanyName
+--from Customers
+--where CompanyName not like '%e%'
+
+--select EmployeeID
+--from orders
+--where DATEDIFF(day,requireddate,shippeddate) >0
+--group by EmployeeID
+
+--select count(OrderID) [ile zamowien], month(orderdate) as miesiac
+--from orders
+--group by month(orderdate)
+--order by month(orderdate)
+
+
+select productname, UnitPrice,
+rank() over (order by unitprice desc) as ranking_r,     -- tworzy ranking 
+dense_rank() over(order by unitprice desc) as ranking_d,
+ntile(5) over(order by unitprice) as grupy, -- tworzy grupy 
+row_number() over (order by unitprice)  as wiersz
+from Products
+
+
+select count(orderid) as ile, productid,
+rank() over (order by count(orderid) desc) as ranking
+from [order details]
+group by ProductID
+
