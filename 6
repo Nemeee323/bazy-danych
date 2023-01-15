@@ -1,0 +1,34 @@
+create table adresy 
+(
+id int constraint pk_id primary key identity(1,1),
+imie char(40),
+nazwisko varchar(50) not null,
+pesel char(11) constraint u_pesel unique not null,
+wzrost numeric(4) constraint ch_wzrost check(wzrost between 90 and 240),
+terryt_id nvarchar(20) constraint ref_terryt references Territories(territoryID)
+
+)
+
+
+insert into adresy(Nazwisko, pesel, wzrost, terryt_id) values ('nowak','78974561233',190,'07960');
+
+update adresy set imie='jan' where id = 1;
+
+--create database serwis_muzyczny;
+--use serwis_muzyczny;
+create table artysci(
+id_artysty int constraint pk_id primary key identity(1,1),
+Nazwa varchar(40) unique not null,
+najwiekszy_hit varchar(40),
+ostatni_singiel varchar(25),
+ostatni_album varchar(25),
+)
+
+create table użytkownik(
+id int constraint pk_id primary key identity(1,1),
+imie char(40),
+nazwisko varchar(50) not null,
+ulubiony_artysta varchar(50) constraint ref_artysta references Artysci(IdArtysta)
+ulubione_playlista
+
+)
