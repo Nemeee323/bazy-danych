@@ -17,7 +17,7 @@ update adresy set imie='jan' where id = 1;
 --create database serwis_muzyczny;
 --use serwis_muzyczny;
 create table artysci(
-id_artysty int constraint pk_id primary key identity(1,1),
+id_artysty int constraint pk_id_artysta primary key identity(1,1),
 Nazwa varchar(40) unique not null,
 najwiekszy_hit varchar(40),
 ostatni_singiel varchar(25),
@@ -25,13 +25,30 @@ ostatni_album varchar(25),
 )
 
 create table użytkownik(
-id int constraint pk_id primary key identity(1,1),
+id_uzytkownik int constraint pk_id_uzytkownik primary key identity(1,1),
 imie char(40),
 nazwisko varchar(50) not null,
-ulubiony_artysta varchar(50) constraint ref_artysta references Artysci(IdArtysta)
-ulubione_playlista
-
+ulubiony_artysta varchar(50) constraint ref_artysta references Artysci(IdArtysta),
+ulubione_gatunek varchar(50) constraint ref_gatunek references gatunki(id_gatunku)
 )
-create table playlisty
-create table gatunki
-create table utwory
+
+create table gatunki(
+id_gatunku int constraint pk_id_gatunek primary key identity(1,1),
+)
+
+create table utwory(
+id_utworu int constraint pk_id_utworu primary key identity(1,1),
+nazwa_utworu varchar(40),
+liczba_wyświetlen int,
+gatunek varchar(40) constraint ref_gatunek references gatunki(id_gatunku),
+wykonawca varchar(40) constraint ref_gatunek references artystci(id_artysty),
+album
+)
+
+create table albumy(
+id_albumu int constraint pk_id_album primary key identity(1,1),
+gatunek
+wykonwca
+liczba utworu
+data wypuszczenia
+)
