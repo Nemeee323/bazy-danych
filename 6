@@ -1,4 +1,4 @@
-use serwis_muzyczny;
+
 create table artysci(
 id_artysty int constraint pk_id_artysta primary key identity(1,1),
 Nazwa varchar(40) unique not null,
@@ -9,7 +9,7 @@ ostatni_album varchar(25),
 
 create table albumy(
 id_albumu int constraint pk_id_album primary key identity(1,1),
-id_artysty int constraint ref_art foreign key(id_albumu) references artysci(id_artysty),
+id_artysty int constraint ref_art foreign key(id_artysty) references artysci(id_artysty),
 nazwa_albumu varchar(40),
 gatunek varchar(40),
 Artysta varchar(40),
@@ -23,15 +23,16 @@ imie varchar(40),
 nazwisko varchar(50) not null,
 id_artysty int  constraint ref_artysci foreign key(id_artysty) references Artysci(id_artysty),
 ulubiony_artysta varchar(40),
-ulubione_album varchar(40) constraint ref_cd foreign key(id_uzytkownik) references albumy(id_albumu)
+id_album int constraint ref_cd foreign key(id_album) references albumy(id_albumu),
+ulubione_album varchar(40)
 )
 create table utwory(
 id_utworu int constraint pk_id_utworu primary key identity(1,1),
 nazwa_utworu varchar(40),
 liczba_wyświetlen int,
 gatunek varchar(40),
-wykonawca varchar(40) constraint ref_artysta foreign key(id_utworu) references Artysci(id_artysty),
-album varchar(40) constraint ref_album foreign key(id_utworu) references albumy(id_albumu)
+id_artysty int constraint ref_artysta foreign key(id_artysty) references Artysci(id_artysty),
+id_album int constraint ref_album foreign key(id_album) references albumy(id_albumu)
 )
 
 
