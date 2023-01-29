@@ -1,8 +1,10 @@
+create database serwis_muzyczny;
+
+go
 
 create table artysci(
 id_artysty int constraint pk_id_artysta primary key identity(1,1),
 Nazwa varchar(40) unique not null,
-najwiekszy_hit varchar(40),
 ostatni_singiel varchar(25),
 ostatni_album varchar(25),
 )
@@ -15,7 +17,11 @@ gatunek varchar(40),
 Artysta varchar(40),
 data_wypuszczenia date,
 )
-
+Create Table playlisty(
+Id_playlisty int constraint pk_id_playlist primary key identity(1,1),
+Nazwa_playlisty varchar(40),
+Liczba_utworów int,
+) 
 create table użytkownik(
 id_uzytkownik int constraint pk_id_uzytkownik primary key identity(1,1),
 imie varchar(40),
@@ -23,7 +29,8 @@ nazwisko varchar(50) not null,
 id_artysty int  constraint ref_artysci foreign key(id_artysty) references Artysci(id_artysty),
 ulubiony_artysta varchar(40),
 id_album int constraint ref_cd foreign key(id_album) references albumy(id_albumu),
-ulubione_album varchar(40)
+ulubione_album varchar(40),
+ulubiona_playlista int constraint ref_play foreign key(ulubiona_playlista) references playlisty(id_playlisty)
 )
 create table utwory(
 id_utworu int constraint pk_id_utworu primary key identity(1,1),
@@ -34,9 +41,5 @@ id_artysty int constraint ref_artysta foreign key(id_artysty) references Artysci
 id_album int constraint ref_album foreign key(id_album) references albumy(id_albumu)
 )
 
-Create Table playlisty (
-Id playlisty
-Nazwa playlisty
-Liczba utworów
-) 
+
 
