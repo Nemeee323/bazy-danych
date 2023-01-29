@@ -1,11 +1,11 @@
 create database serwis_muzyczny;
-
 go
-
+use serwis_muzyczny;
+go
 create table artysci(
 id_artysty int constraint pk_id_artysta primary key identity(1,1),
 Nazwa varchar(40) unique not null,
-ostatni_singiel varchar(25),
+ilosc_utworow int,
 ostatni_album varchar(25),
 )
 
@@ -13,7 +13,6 @@ create table albumy(
 id_albumu int constraint pk_id_album primary key identity(1,1),
 id_artysty int constraint ref_art foreign key(id_artysty) references artysci(id_artysty),
 nazwa_albumu varchar(40),
-gatunek varchar(40),
 Artysta varchar(40),
 data_wypuszczenia date,
 )
@@ -26,10 +25,8 @@ create table użytkownik(
 id_uzytkownik int constraint pk_id_uzytkownik primary key identity(1,1),
 imie varchar(40),
 nazwisko varchar(50) not null,
-id_artysty int  constraint ref_artysci foreign key(id_artysty) references Artysci(id_artysty),
-ulubiony_artysta varchar(40),
-id_album int constraint ref_cd foreign key(id_album) references albumy(id_albumu),
-ulubione_album varchar(40),
+ulubiony_artysta_id int constraint ref_artysci foreign key(ulubiony_artysta_id) references Artysci(id_artysty),
+ulubione_album_id int constraint ref_cd foreign key(ulubione_album_id) references albumy(id_albumu),
 ulubiona_playlista int constraint ref_play foreign key(ulubiona_playlista) references playlisty(id_playlisty)
 )
 create table utwory(
@@ -38,8 +35,19 @@ nazwa_utworu varchar(40),
 liczba_wyświetlen int,
 gatunek varchar(40),
 id_artysty int constraint ref_artysta foreign key(id_artysty) references Artysci(id_artysty),
-id_album int constraint ref_album foreign key(id_album) references albumy(id_albumu)
 )
+
+insert into artysci values ('beatles','426','Let it be');
+insert into artysci values ('queen','243','Made in Heaven');
+insert into artysci values ('elvis presley','623','Moody blue');
+insert into artysci values ('eminem','289','Music to be murdered by');
+insert into artysci values ('nirvana','180','Nirvana');
+
+insert into albumy values ('1','Help!','beatles','08/06/1965');
+insert into albumy values ('2','A night at the opera','queen','11/21/1975');
+insert into albumy values ('3','Pure Gold','elvis presley','09/07/1975');
+insert into albumy values ('4','The Eminem Show','Eminem','06/04/2002');
+insert into albumy values ('5','Nevermind','nirvana','09/21/1991');
 
 
 
